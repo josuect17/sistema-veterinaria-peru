@@ -1,9 +1,9 @@
 Django==5.0.6
-gunicorn==25.3.0
-psycopg2-binary==2.9.12
-dj-database-url==3.1.2
-pillow==12.1.1
-reportlab==4.4.10
-openpyxl==3.1.5
-django-crispy-forms==2.6
-crispy-bootstrap5==2026.3
+gunicorn
+psycopg2-binary
+dj-database-url
+pillow
+reportlab
+openpyxl
+django-crispy-forms
+crispy-bootstrap5
