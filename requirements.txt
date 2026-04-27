@@ -1,9 +1,6 @@
-Django==5.0.6
+Django
 gunicorn
 psycopg2-binary
-dj-database-url
-pillow
-reportlab
-openpyxl
+whitenoise
 django-crispy-forms
 crispy-bootstrap5
