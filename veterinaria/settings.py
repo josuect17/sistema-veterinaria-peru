@@ -33,12 +33,14 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
+    
 ]
 
 ROOT_URLCONF = 'veterinaria.urls'
@@ -63,19 +65,24 @@ TEMPLATES = [
 WSGI_APPLICATION = 'veterinaria.wsgi.application'
 
 import dj_database_url
-
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sistema_veterinaria_db',
-        'USER': 'sistema_veterinaria_db_user',
-        'PASSWORD': 'iZqIwJmmUnzjBZedDhP8FMox24dm5C1k',
-        'HOST': 'dpg-d7mm6p5ckfvc73ehafrg-a.ohio-postgres.render.com',
-        'PORT': '5432',
+ DATABASES = {
+        'default': dj_database_url.config()
     }
-}
-
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'sistema_veterinaria_db',
+            'USER': 'root',
+            'PASSWORD': '',
+            'HOST': 'localhost',
+            'PORT': '3306',
+            'OPTIONS': {
+                'charset': 'utf8mb4',
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            },
+        }
+    }
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -91,6 +98,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
